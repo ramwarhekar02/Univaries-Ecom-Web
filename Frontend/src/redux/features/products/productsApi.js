@@ -4,7 +4,7 @@ import { getBaseUrl } from "../../../utils/baseUrl";
 const productApi = createApi({
     reducerPath: 'productApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: `${getBaseUrl()}/api/products`,
+        baseUrl: 'https://univaries-ecom-web-xjfg.vercel.app/api/products',
         credentials: 'include',
     }),
     tagTypes: ["Products"],
