@@ -1,4 +1,4 @@
 export const getBaseUrl = () => {
-    return 'http://localhost:3000'
+    return 'https://univaries-ecom-m52egvw6w-ramwarhekar02-gmailcoms-projects.vercel.app/'
 }
 
