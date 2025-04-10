@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose')
 require('dotenv').config();
 
+const path = require('path')
+
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -12,10 +14,22 @@ app.use(express.json({limit:"25mb"}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
+
+const allowedOrigins = [
+    "http://localhost:5173",
+    // "https://your-frontend-domain.com",
+];
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true,
-}))
+}));
 
 
 // ramwarhekar04 
@@ -34,12 +48,17 @@ main()
     .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://ramwarhekar04:0gqMKc78VaJVkuhC@univaries.0popb.mongodb.net/univaries?retryWrites=true&w=majority&appName=univaries');
- 
-  app.get("/", (req, res)=> {
-      res.send("Hello")
-  })
+    const dbUrl = process.env.DB_URL;
+    if (!dbUrl) {
+        throw new Error("DB_URL is not defined in the environment variables.");
+    }
+    await mongoose.connect(dbUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+
+    app.get("/", (req, res) => {
+        res.send("Hello");
+    });
 }
-
-
-app.listen(3000)
+app.listen(3000);
