@@ -1,4 +1,4 @@
 export const getBaseUrl = () => {
-    return 'https://univaries-ecom-m52egvw6w-ramwarhekar02-gmailcoms-projects.vercel.app/'
+    return 'https://univaries-ecom-web-xjfg.vercel.app/'
 }
 
