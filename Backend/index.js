@@ -10,15 +10,15 @@ dotenv.config();
 
 const app = express();
 
-
 app.use(express.json({ limit: "25mb" }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 const allowedOrigins = [
-    "https://univaries-ecom-web-ramwarhekar02-gmailcoms-projects.vercel.app/",
+    "http://localhost:5173",
+    "https://univaries-ecom-web-frontend.vercel.app",
+    "https://univaries-ecom-web-ramwarhekar02-gmailcoms-projects.vercel.app"
 ];
 
 app.use(cors({
@@ -29,9 +29,10 @@ app.use(cors({
             callback(new Error("Not allowed by CORS"));
         }
     },
-    credentials: true, // Ensure cookies are sent with requests
+    credentials: true
 }));
 
+app.options('*', cors());
 
 const authRoutes = require('./src/users/user.route');
 const productRoutes = require('./src/products/products.route');
@@ -41,11 +42,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-
 app.get("/", (req, res) => {
     res.send("Univaries E-commerce API is running");
 });
-
 
 const PORT = process.env.PORT || 3000;
 
@@ -58,7 +57,7 @@ async function startServer() {
 
         await mongoose.connect(dbUrl, {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
+            useUnifiedTopology: true
         });
 
         console.log("Connected to MongoDB");
