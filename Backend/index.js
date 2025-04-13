@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const allowedOrigins = [
     "http://localhost:5173",
-    // "https://your-deployed-frontend.com",
+    "https://univaries-ecom-web-frontend.vercel.app", // Remove trailing slash
 ];
 
 app.use(cors({
@@ -30,7 +30,7 @@ app.use(cors({
             callback(new Error("Not allowed by CORS"));
         }
     },
-    credentials: true,
+    credentials: true, // Ensure cookies are sent with requests
 }));
 
 
