@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://univaries-ecom-web-frontend.vercel.app", // Remove trailing slash
+    "https://univaries-ecom-web-frontend.vercel.app",
 ];
 
 app.use(cors({

@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getBaseUrl } from '../../../utils/baseUrl';
 
 const reviewApi =  createApi({
     reducerPath: 'reviewApi',
     baseQuery: fetchBaseQuery({ 
-        baseUrl: `${getBaseUrl()}/api/reviews`,
+        baseUrl: 'https://univaries-ecom-web-xjfg.vercel.app/api/reviews',
         credentials: 'include',
     }),
     tagTypes: ["Reviews"],
