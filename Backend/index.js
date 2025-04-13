@@ -18,8 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 const allowedOrigins = [
-    "http://localhost:5173",
-    "https://univaries-ecom-web-frontend.vercel.app",
+    "https://univaries-ecom-web-ramwarhekar02-gmailcoms-projects.vercel.app/",
 ];
 
 app.use(cors({
