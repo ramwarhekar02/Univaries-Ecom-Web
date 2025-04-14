@@ -17,19 +17,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://univaries-ecom-web-frontend.vercel.app", // Replace with your deployed frontend URL
+    "https://univaries-ecom-web.vercel.app", // Ensure this matches your deployed frontend URL
     "https://univaries-ecom-web.onrender.com"
 ];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true 
 }));
 
 app.options('*', cors());
