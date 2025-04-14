@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://univaries-ecom-web-xjfg.vercel.app/api/auth',
+        baseUrl: 'https://univaries-ecom-web.onrender.com/api/auth',
         credentials: 'include',
     }),
     tagTypes: ["User"],

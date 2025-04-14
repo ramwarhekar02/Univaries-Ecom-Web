@@ -1,4 +1,4 @@
 export const getBaseUrl = () => {
-    return 'http://localhost:3000'
+    return 'https://univaries-ecom-web.onrender.com/'
 }
 
