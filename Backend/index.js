@@ -10,29 +10,25 @@ dotenv.config();
 
 const app = express();
 
-
 app.use(express.json({ limit: "25mb" }));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://univaries-ecom-web-frontend.vercel.app/",
+    "https://univaries-ecom-web.vercel.app", // Ensure this matches your deployed frontend URL
+    "https://univaries-ecom-web.onrender.com"
 ];
 
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true 
 }));
 
+app.options('*', cors());
 
 const authRoutes = require('./src/users/user.route');
 const productRoutes = require('./src/products/products.route');
@@ -42,11 +38,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-
 app.get("/", (req, res) => {
     res.send("Univaries E-commerce API is running");
 });
-
 
 const PORT = process.env.PORT || 3000;
 
@@ -59,13 +53,13 @@ async function startServer() {
 
         await mongoose.connect(dbUrl, {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
+            useUnifiedTopology: true
         });
 
-        console.log("✅ Connected to MongoDB");
+        console.log("Connected to MongoDB");
 
         app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
+            console.log(`Server running on http://localhost:${PORT}`);
         });
 
     } catch (err) {
