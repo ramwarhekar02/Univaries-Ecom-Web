@@ -8,18 +8,29 @@ const router = express.Router();
 
 router.post("/create-product", async (req, res)=> {
     try {
-        const newProduct = new Products({
-            ...req.body
-        })
-        const savedProduct = await newProduct.save()
+        const { name, category, description, price, image, color, oldPrice } = req.body;
 
-        const reviews = await Reviews.find({productId: savedProduct._id})
-        if(reviews.length > 0) {
-            const totalRating = reviews.reduce((acc, review)=> acc + review.rating, 0);
-            const avgRating = totalRating/reviews.length;
-            savedProduct.rating = avgRating
-            await savedProduct.save();
+        // Validate required fields
+        if (!name || !category || !description || !price || !image || !color) {
+            console.log("Validation Error: Missing required fields");
+            return res.status(400).send({ message: "All fields are required" });
         }
+
+        const newProduct = new Products({
+            name,
+            category,
+            description,
+            price,
+            oldPrice: oldPrice || null,
+            image,
+            color,
+            author: req.userId, // Ensure this is set
+        });
+
+        console.log("Creating new product:", newProduct);
+
+        const savedProduct = await newProduct.save();
+        console.log("Product saved successfully:", savedProduct);
         res.status(201).send(savedProduct);
     } catch (error) {
         console.log("Error Creating new Product", error);
