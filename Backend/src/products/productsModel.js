@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema ({ 
     name: { 
         type: String,
-        required: true, // Ensure this is provided
+        required: true, 
     },
     category: String,
     description: String,
     price: {
         type: Number,
-        required: true, // Ensure this is provided
+        required: true,
     },
     oldPrice: Number,
     image: String,
@@ -21,7 +21,7 @@ const ProductSchema = new mongoose.Schema ({
     author: {
         type: mongoose.Types.ObjectId,
         ref: "User",
-        required: true, // Ensure this is provided
+        required: true, 
     },
 })
 

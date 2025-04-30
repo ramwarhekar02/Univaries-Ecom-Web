@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://univaries-ecom-web.vercel.app", // Ensure this matches your deployed frontend URL
+    "https://univaries-ecom-web.vercel.app",
     "https://univaries-ecom-web.onrender.com"
 ];
 
