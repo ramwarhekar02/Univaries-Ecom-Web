@@ -3,6 +3,7 @@ const Products = require('./productsModel');
 const Reviews = require('../reviews/reviews.Model');
 const verifyToken = require('../middleware/verifyToken');
 const verifyAdmin = require('../middleware/verifyAdmin');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -72,7 +73,13 @@ router.get("/",  async (req, res)=> {
 router.get("/:id", async (req, res) => { 
     try {
         const { id } = req.params;
-        console.log("Fetching product with ID:", id);
+        console.log("Fetching product with ID:", id); 
+
+        // Validate the ID format
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            console.log("Invalid Product ID:", id);
+            return res.status(400).send({ message: "Invalid Product ID" });
+        }
 
         const product = await Products.findById(id).populate("author", "email username");
         if (!product) {
@@ -83,7 +90,7 @@ router.get("/:id", async (req, res) => {
         const reviews = await Reviews.find({ productId: id }).populate("userId", "username email");
         res.status(200).send({ product, reviews });
     } catch (error) {
-        console.error("Error Fetching New Product:", error.message); 
+        console.error("Error Fetching New Product:", error.message);
         res.status(500).send({ message: "Error Fetching New Product", error: error.message });
     }
 });
