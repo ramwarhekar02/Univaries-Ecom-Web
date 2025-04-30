@@ -33,7 +33,9 @@ const productApi = createApi({
                 url: '/create-product',
                 method: 'POST',
                 body: newProduct,
-                credentials: 'include', // Ensure credentials are included
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
             }),
             invalidatesTags: ['Products'],
         }),
