@@ -6,13 +6,13 @@ const verifyToken = (req, res, next) => {
         const token = req.cookies.token;
 
         if (!token) {
-            return res.status(401).send({ message: "Invalid Token" }); // Changed status to 401
+            return res.status(401).send({ message: "Invalid Token" }); 
         }
         const decoded = jwt.verify(token, JWT_SECRET);
         if (!decoded) {
-            return res.status(401).send({ message: "Invalid Token or Not Valid" }); // Changed status to 401
+            return res.status(401).send({ message: "Invalid Token or Not Valid" }); 
         }
-        req.userId = decoded.userId; // Ensure this is set
+        req.userId = decoded.userId;
         req.role = decoded.role;
         next();
     } catch (error) {

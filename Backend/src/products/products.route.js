@@ -10,7 +10,6 @@ router.post("/create-product", verifyToken, async (req, res) => {
     try {
         const { name, category, description, price, image, color, oldPrice } = req.body;
 
-        // Validate required fields
         if (!name || !category || !description || !price || !image || !color) {
             console.log("Validation Error: Missing required fields");
             return res.status(400).send({ message: "All fields are required" });
@@ -24,7 +23,7 @@ router.post("/create-product", verifyToken, async (req, res) => {
             oldPrice: oldPrice || null,
             image,
             color,
-            author: req.userId, // Ensure this is set
+            author: req.userId,
         });
 
         console.log("Creating new product:", newProduct);
