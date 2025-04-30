@@ -141,11 +141,13 @@ const AddNewPost = () => {
         <div className="mt-10 p-4 border rounded-md bg-gray-100">
           <h2 className="text-xl font-bold mb-4">Product Preview</h2>
           <div className="flex gap-4">
-            <img
-              src={formData.image}
-              alt={formData.name}
-              className="w-32 h-32 object-cover rounded-md"
-            />
+            {formData.image && (
+              <img
+                src={formData.image}
+                alt={formData.name}
+                className="w-32 h-32 object-cover rounded-md"
+              />
+            )}
             <div>
               <h3 className="text-lg font-bold">{formData.name}</h3>
               <p className="text-sm text-gray-600">{formData.description}</p>

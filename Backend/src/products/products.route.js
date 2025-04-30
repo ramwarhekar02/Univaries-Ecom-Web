@@ -24,7 +24,7 @@ router.post("/create-product", verifyToken, async (req, res) => {
             oldPrice: oldPrice || null,
             image,
             color,
-            author: req.userId, // Set the author to the logged-in user's ID
+            author: req.userId, // Ensure this is set
         });
 
         console.log("Creating new product:", newProduct);
@@ -33,8 +33,8 @@ router.post("/create-product", verifyToken, async (req, res) => {
         console.log("Product saved successfully:", savedProduct);
         res.status(201).send(savedProduct);
     } catch (error) {
-        console.error("Error Creating new Product:", error.message); // Log the specific error message
-        res.status(500).send({ message: "Error Creating new Product", error: error.message }); // Include error details in the response
+        console.error("Error Creating new Product:", error.message);
+        res.status(500).send({ message: "Error Creating new Product", error: error.message });
     }
 });
 

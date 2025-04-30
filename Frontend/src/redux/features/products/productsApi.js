@@ -33,7 +33,7 @@ const productApi = createApi({
                 url: '/create-product',
                 method: 'POST',
                 body: newProduct,
-                credentials: 'include',
+                credentials: 'include', // Ensure credentials are included
             }),
             invalidatesTags: ['Products'],
         }),
