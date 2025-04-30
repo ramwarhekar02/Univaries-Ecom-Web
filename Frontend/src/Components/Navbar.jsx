@@ -51,7 +51,7 @@ const Navbar = () => {
     { label: "Dashboard", path: "/" },
     { label: "Manage Items", path: "/" },
     { label: "All Orders", path: "/" },
-    { label: "Add New Post", path: "/" },
+    { label: "Add New Post", path: "/add-new-post" },
   ];
 
   const userDropDownMenus = [
