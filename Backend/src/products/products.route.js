@@ -12,7 +12,6 @@ router.post("/create-product", async (req, res)=> {
         const { name, category, description, price, image, color, oldPrice } = req.body;
 
         if (!name || !category || !description || !price || !image || !color) {
-            console.log("Validation Error: Missing required fields");
             return res.status(400).send({ message: "All fields are required" });
         }
 
@@ -27,10 +26,7 @@ router.post("/create-product", async (req, res)=> {
             author: req.userId,
         });
 
-        console.log("Creating new product:", newProduct);
-
         const savedProduct = await newProduct.save();
-        console.log("Product saved successfully:", savedProduct);
         res.status(201).send(savedProduct);
     } catch (error) {
         console.log("Error Creating new Product", error);
